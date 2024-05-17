@@ -144,7 +144,7 @@
   align-items: center;
   overflow-x: hidden;
   overflow-y: auto; /* Ensure overflow-y is set to auto */
-  justify-content: center;
+  justify-content: start;
   max-height: 270px; /* Set a maximum height to trigger overflow */
   width: 100%;
   background-color: #171d23; /* Background color */

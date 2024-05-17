@@ -1,0 +1,73 @@
+.currency-container {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+    animation: scroll 30s linear infinite;
+    align-items: center;
+    justify-content: center;
+}
+
+.currency-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+    gap: 10px;
+}
+
+.currency-item h4{
+    color: white;
+}
+
+.currency-item h3{
+    color: white;
+}
+
+.currency-item img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.mainbody_part {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+.center button{
+    width: 350px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease-in;
+    height: 55px;
+    border: none;
+    box-shadow: 0px 0px 12px #34414e;
+    background-color: #646e79;
+    color: rgb(255, 255, 255);
+    font-size: 1rem;
+    font-weight: 500;
+&:hover{
+    box-shadow: 0px 0px 19px #34414e;
+    background-color: #828e9b;
+    color: #e9f0f1;
+}}

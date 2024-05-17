@@ -1,0 +1,341 @@
+.mainbody {
+  background-color: #080a0c;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.github {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 90%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.github img {
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+&:hover{
+  transform: rotate(5deg);
+  opacity: 0.8;
+}}
+
+.github h2{
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.mainbody h2{
+  color: white;
+}
+
+.mainbody_container {
+  display: flex;
+  padding-top: 1.2rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.mainbody_container h2 {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.mainbody_container h3{
+  color: white;
+  font-weight: 400;
+}
+
+.mainbody_container img {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+}
+
+.all_currecies {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.single_currec {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid white;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+&:hover{
+  border: 1px solid grey;
+}}
+
+.input_section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.input_section section {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #171d23;
+  border-radius: 12px;
+  position: relative;
+}
+
+.input_section section input {
+  background-color: #2b2e33;
+  border: none;
+  border-radius: 12px;
+  height: 25px;
+  width: 150px;
+  padding: 10px;
+  font-size: 1rem;
+  color: white;
+}
+
+.button_open {
+  position: relative;
+}
+
+.input_section section button {
+  background-color: #2b2e33;
+  border: none;
+  height: 45px;
+  width: 250px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 10px;
+  border-radius: 12px;
+  font-size: 1rem; 
+}
+
+.input_section section span {
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  left: 90%;
+  top: 50%; 
+  transform: translate(-50%,-50%); 
+}
+
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute; /* Ensure absolute positioning */
+  top: 100%; /* Position it right below the button */
+  left: 0; /* Align to the left of the parent */
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: auto; /* Ensure overflow-y is set to auto */
+  justify-content: center;
+  max-height: 270px; /* Set a maximum height to trigger overflow */
+  width: 100%;
+  background-color: #171d23; /* Background color */
+  cursor: pointer;
+  z-index: 2;
+  padding: 1rem; /* Optional: Add padding for better visibility */
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in;
+}
+
+.input_value_section {
+  position: relative;
+}
+
+.input_value_section input {
+  width: 250px !important;
+}
+
+.input_value_section span{
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.reverse {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  background-color: #29323b;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+&:hover{
+  opacity: 0.6;
+}}
+
+.reverse_img {
+  height: 15px;
+  padding: 8px;
+  width: 15px;
+}
+
+.dropdown-content_single {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: -5px;
+  width: 100%;
+  position: relative;
+  padding: 15px;
+  transition: all 0.2s ease-in;
+  color: white;
+&:hover{
+  background-color: #29323b;
+}}
+
+.dropdown-content_single img {
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: 10px;
+    background-color: transparent;
+}
+
+.dropdown-content_single p {
+    margin-right: 5px;
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  position: absolute;
+  top: 45%;
+}
+
+.result_section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.result_section h3 {
+  opacity: 0.8;
+  font-size: 1.2rem
+}
+
+.result_section h5 {
+  font-size: 1.5rem;
+  font-weight: 200;
+}
+
+.result_section p {
+  font-size: 1.6rem;
+  opacity: 1;
+  color: white;
+  font-weight: 500;
+}
+
+.arrow-up, .arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+}
+
+.arrow-up {
+  border-bottom: 12px solid white;
+  margin-bottom: 20px;
+}
+
+.arrow-down {
+  border-top: 12px solid white;
+}
+
+@media (max-width: 768px) {
+  .github {
+    top: 95%;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .input_section {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .input_section section {
+    width: 90%;
+  }
+
+  .input_section section button {
+    width: 100%;
+  }
+
+  .result {
+    position: static;
+    margin-top: 2rem;
+  }
+
+  .all_currecies {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .currency-container {
+    flex-direction: row;
+    animation: none;
+  }
+
+  .mainbody_container h2 {
+    font-size: 1.2rem;
+  }
+
+  .mainbody_container h3 {
+    font-size: 1rem;
+  }
+
+  .mainbody_container img {
+    height: 80px;
+    width: 80px;
+  }
+
+  .reverse {
+    margin-top: 1rem;
+  }
+
+  .dropdown-content {
+    max-height: 150px;
+  }
+
+  .center {
+    margin-top: 2rem;
+  }
+
+  .center button {
+    width: 90%;
+  }
+
+  .modal-content {
+    width: 80%;
+    min-height: 300px;
+  }
+}

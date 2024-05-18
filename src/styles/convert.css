@@ -270,6 +270,20 @@
   border-top: 12px solid white;
 }
 
+.inside_text {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.inside_text img {
+  height: 35px;
+  width: 35px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 @media (max-width: 768px) {
   .github {
     top: 95%;
@@ -332,6 +346,7 @@
 
   .center button {
     width: 90%;
+    height: 40px;
   }
 
   .modal-content {

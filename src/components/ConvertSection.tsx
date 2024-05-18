@@ -5,13 +5,16 @@ import '../styles/convert.css';
 import arrows from '../assets/arrows_white.png';
 
 export default function ConvertSection() {
+    const defaultFromCurrency = currencies.find(currency => currency.short_name === 'RUB')!;
+    const defaultToCurrency = currencies.find(currency => currency.short_name === 'USD')!;
+
     const [isFrom, setIsFrom] = useState(false);
     const [isTo, setIsTo] = useState(false);
-    const [amountFrom, setAmountFrom] = useState<number>(1);
-    const [amountTo, setAmountTo] = useState<number>(0);
+    const [amountFrom, setAmountFrom] = useState<string>('1');
+    const [amountTo, setAmountTo] = useState<string>('');
 
-    const [selectedFromCurrency, setSelectedFromCurrency] = useState<ICurrency | null>(null);
-    const [selectedToCurrency, setSelectedToCurrency] = useState<ICurrency | null>(null);
+    const [selectedFromCurrency, setSelectedFromCurrency] = useState<ICurrency>(defaultFromCurrency);
+    const [selectedToCurrency, setSelectedToCurrency] = useState<ICurrency>(defaultToCurrency);
 
     const dropdownFromRef = useRef<HTMLDivElement>(null);
     const dropdownToRef = useRef<HTMLDivElement>(null);
@@ -24,7 +27,7 @@ export default function ConvertSection() {
         setSelectedFromCurrency(currency);
         setIsFrom(false);
         if (selectedToCurrency) {
-            setAmountTo(formatAmount((amountFrom * currency.value) / selectedToCurrency.value));
+            setAmountTo(formatAmount((parseFloat(amountFrom) * currency.value) / selectedToCurrency.value).toString());
         }
     };
 
@@ -32,7 +35,7 @@ export default function ConvertSection() {
         setSelectedToCurrency(currency);
         setIsTo(false);
         if (selectedFromCurrency) {
-            setAmountTo(formatAmount((amountFrom * selectedFromCurrency.value) / currency.value));
+            setAmountTo(formatAmount((parseFloat(amountFrom) * selectedFromCurrency.value) / currency.value).toString());
         }
     };
 
@@ -40,23 +43,31 @@ export default function ConvertSection() {
         const tempCurrency = selectedFromCurrency;
         setSelectedFromCurrency(selectedToCurrency);
         setSelectedToCurrency(tempCurrency);
-        setAmountFrom(parseFloat(amountTo.toString()));
-        setAmountTo(parseFloat(amountFrom.toFixed(5)));
+        setAmountFrom(amountTo);
+        setAmountTo(amountFrom);
     };
 
     const handleAmountFromChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = parseFloat(e.target.value) || 0;
-        setAmountFrom(value);
-        if (selectedFromCurrency && selectedToCurrency) {
-            setAmountTo(formatAmount((value * selectedFromCurrency.value) / selectedToCurrency.value));
+        const value = e.target.value;
+        if (/^\d*\.?\d*$/.test(value)) {
+            setAmountFrom(value);
+            if (selectedFromCurrency && selectedToCurrency && value !== '') {
+                setAmountTo(formatAmount((parseFloat(value) * selectedFromCurrency.value) / selectedToCurrency.value).toString());
+            } else {
+                setAmountTo('');
+            }
         }
     };
 
     const handleAmountToChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = parseFloat(e.target.value) || 0;
-        setAmountTo(value);
-        if (selectedFromCurrency && selectedToCurrency) {
-            setAmountFrom(formatAmount((value * selectedToCurrency.value) / selectedFromCurrency.value));
+        const value = e.target.value;
+        if (/^\d*\.?\d*$/.test(value)) {
+            setAmountTo(value);
+            if (selectedFromCurrency && selectedToCurrency && value !== '') {
+                setAmountFrom(formatAmount((parseFloat(value) * selectedToCurrency.value) / selectedFromCurrency.value).toString());
+            } else {
+                setAmountFrom('');
+            }
         }
     };
 
@@ -87,11 +98,14 @@ export default function ConvertSection() {
     return (
         <div className='input_section'>
             <section>
-                <h2>У меня есть</h2>
+                <div className='inside_text'>
+                    <h2>У меня есть</h2>
+                    <img src={selectedFromCurrency.img} />
+                </div>
                 <div className='input_value_section'>
                     <input 
-                        type="number"
-                        value={formatAmount(amountFrom)}
+                        type="text"
+                        value={amountFrom}
                         onChange={handleAmountFromChange}
                         placeholder={`1 ${selectedFromCurrency?.short_name} = ${selectedFromCurrency && selectedToCurrency ? (selectedFromCurrency.value / selectedToCurrency.value).toFixed(5) : ''} ${selectedToCurrency?.short_name}`}
                     />
@@ -127,11 +141,14 @@ export default function ConvertSection() {
             </button>
 
             <section>
-                <h2>Я хочу купить</h2>
+                <div className='inside_text'>
+                    <h2>Я хочу купить</h2>
+                    <img src={selectedToCurrency.img} />
+                </div>
                 <div className='input_value_section'>
                     <input 
-                        type="number"
-                        value={formatAmount(amountTo)}
+                        type="text"
+                        value={amountTo}
                         onChange={handleAmountToChange}
                         placeholder={`1 ${selectedToCurrency?.short_name} = ${selectedToCurrency && selectedFromCurrency ? (selectedToCurrency.value / selectedFromCurrency.value).toFixed(5) : ''} ${selectedFromCurrency?.short_name}`}
                     />

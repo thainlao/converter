@@ -16,11 +16,18 @@ export default function ConvertSection() {
     const [selectedFromCurrency, setSelectedFromCurrency] = useState<ICurrency>(defaultFromCurrency);
     const [selectedToCurrency, setSelectedToCurrency] = useState<ICurrency>(defaultToCurrency);
 
+    const [searchFrom, setSearchFrom] = useState<string>('');
+    const [searchTo, setSearchTo] = useState<string>('');
+
     const dropdownFromRef = useRef<HTMLDivElement>(null);
     const dropdownToRef = useRef<HTMLDivElement>(null);
 
     const formatAmount = (value: number) => {
         return parseFloat(value.toFixed(5));
+    };
+
+    const formatNumberWithSpaces = (value: any) => {
+        return value.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     };
 
     const handleFromCurrencySelect = (currency: ICurrency) => {
@@ -48,23 +55,29 @@ export default function ConvertSection() {
     };
 
     const handleAmountFromChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
+        const value = e.target.value.replace(/\s+/g, ''); // Удаляем пробелы
         if (/^\d*\.?\d*$/.test(value)) {
-            setAmountFrom(value);
+            const formattedValue = formatNumberWithSpaces(value);
+            setAmountFrom(formattedValue);
             if (selectedFromCurrency && selectedToCurrency && value !== '') {
-                setAmountTo(formatAmount((parseFloat(value) * selectedFromCurrency.value) / selectedToCurrency.value).toString());
+                setAmountTo(formatNumberWithSpaces(
+                    formatAmount((parseFloat(value) * selectedFromCurrency.value) / selectedToCurrency.value).toString()
+                ));
             } else {
                 setAmountTo('');
             }
         }
     };
-
+    
     const handleAmountToChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
+        const value = e.target.value.replace(/\s+/g, ''); // Удаляем пробелы
         if (/^\d*\.?\d*$/.test(value)) {
-            setAmountTo(value);
+            const formattedValue = formatNumberWithSpaces(value);
+            setAmountTo(formattedValue);
             if (selectedFromCurrency && selectedToCurrency && value !== '') {
-                setAmountFrom(formatAmount((parseFloat(value) * selectedToCurrency.value) / selectedFromCurrency.value).toString());
+                setAmountFrom(formatNumberWithSpaces(
+                    formatAmount((parseFloat(value) * selectedToCurrency.value) / selectedFromCurrency.value).toString()
+                ));
             } else {
                 setAmountFrom('');
             }
@@ -87,6 +100,16 @@ export default function ConvertSection() {
         };
     }, []);
 
+    const filteredFromCurrencies = currencies.filter(currency =>
+        currency.short_name.toLowerCase().includes(searchFrom.toLowerCase()) ||
+        currency.name.toLowerCase().includes(searchFrom.toLowerCase())
+    );
+
+    const filteredToCurrencies = currencies.filter(currency =>
+        currency.short_name.toLowerCase().includes(searchTo.toLowerCase()) ||
+        currency.name.toLowerCase().includes(searchTo.toLowerCase())
+    );
+
     useEffect(() => {
         if (selectedFromCurrency && selectedToCurrency) {
             document.title = `Converter (${selectedFromCurrency.short_name} - ${selectedToCurrency.short_name})`;
@@ -103,12 +126,12 @@ export default function ConvertSection() {
                     <img src={selectedFromCurrency.img} />
                 </div>
                 <div className='input_value_section'>
-                    <input 
-                        type="text"
-                        value={amountFrom}
-                        onChange={handleAmountFromChange}
-                        placeholder={`1 ${selectedFromCurrency?.short_name} = ${selectedFromCurrency && selectedToCurrency ? (selectedFromCurrency.value / selectedToCurrency.value).toFixed(5) : ''} ${selectedToCurrency?.short_name}`}
-                    />
+                <input 
+                    type="text"
+                    value={amountFrom}
+                    onChange={handleAmountFromChange}
+                    placeholder={`1 ${selectedFromCurrency?.short_name} = ${selectedFromCurrency && selectedToCurrency ? (selectedFromCurrency.value / selectedToCurrency.value).toFixed(5) : ''} ${selectedToCurrency?.short_name}`}
+                />
                     <span>{selectedFromCurrency?.short_name}</span>
                 </div>
                 <div onClick={() => setIsFrom((prev) => !prev)} className='button_open'>
@@ -122,7 +145,12 @@ export default function ConvertSection() {
 
                 {isFrom && (
                     <div className='dropdown-content' ref={dropdownFromRef}>
-                        {currencies.map((currency) => (
+                        <input 
+                            placeholder='Rub...'
+                            value={searchFrom}
+                            onChange={(e) => setSearchFrom(e.target.value)}
+                        />
+                        {filteredFromCurrencies.map((currency) => (
                             <div
                                 className="dropdown-content_single"
                                 key={currency.short_name}
@@ -146,12 +174,12 @@ export default function ConvertSection() {
                     <img src={selectedToCurrency.img} />
                 </div>
                 <div className='input_value_section'>
-                    <input 
-                        type="text"
-                        value={amountTo}
-                        onChange={handleAmountToChange}
-                        placeholder={`1 ${selectedToCurrency?.short_name} = ${selectedToCurrency && selectedFromCurrency ? (selectedToCurrency.value / selectedFromCurrency.value).toFixed(5) : ''} ${selectedFromCurrency?.short_name}`}
-                    />
+                <input 
+                    type="text"
+                    value={amountTo}
+                    onChange={handleAmountToChange}
+                    placeholder={`1 ${selectedToCurrency?.short_name} = ${selectedToCurrency && selectedFromCurrency ? (selectedToCurrency.value / selectedFromCurrency.value).toFixed(5) : ''} ${selectedFromCurrency?.short_name}`}
+                />
                     <span>{selectedToCurrency?.short_name}</span> 
                     
                 </div>
@@ -167,7 +195,12 @@ export default function ConvertSection() {
                 </div>
                 {isTo && (
                     <div className='dropdown-content' ref={dropdownToRef}>
-                        {currencies.map((currency) => (
+                        <input 
+                            placeholder='Что вы ищете?'
+                            value={searchTo}
+                            onChange={(e) => setSearchTo(e.target.value)}
+                        />
+                        {filteredToCurrencies.map((currency) => (
                             <div
                                 className="dropdown-content_single"
                                 key={currency.short_name}

@@ -35,3 +35,11 @@ input[type='number'] {
   transition: all 0.3s ease;
 }
 
+*:focus {
+  outline: none;
+}
+
+input:focus:valid {
+  box-shadow: 0 0 7px #66599c; /* Измените цвет и размер тени, чтобы подогнать под ваши предпочтения */
+}
+

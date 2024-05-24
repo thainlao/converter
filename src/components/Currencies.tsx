@@ -16,7 +16,7 @@ export const currencies: ICurrency[] = [
         "name": "Bitcoin",
         "short_name": "BTC",
         "img": btc,
-        "value": 65666
+        "value": 67566
     },
     {
         "name": "US Dollar",
@@ -28,7 +28,7 @@ export const currencies: ICurrency[] = [
         "name": "Ethereum",
         "short_name": "ETH",
         "img": eth,
-        "value": 3288.82
+        "value": 3705.82
     },
     {
         "name": "Euro",
@@ -40,13 +40,13 @@ export const currencies: ICurrency[] = [
         "name": "Russian Ruble",
         "short_name": "RUB",
         "img": rub,
-        "value": 0.0108
+        "value": 0.011
     },
     {
         "name": "Yuan",
         "short_name": "CNY",
         "img": china,
-        "value": 0.13
+        "value": 0.138
     },
     {
         "name": "TON Coin",
@@ -64,7 +64,7 @@ export const currencies: ICurrency[] = [
         "name": "NOT Coin",
         "short_name": "NOT",
         "img": not,
-        "value": 0.006
+        "value": 0.0047
     },
     {
         "name": "XRP",

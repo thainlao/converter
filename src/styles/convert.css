@@ -90,7 +90,7 @@
   flex-direction: column;
   align-items: start;
   gap: 1rem;
-  padding: 1rem;
+  padding: 1.5rem;
   background-color: #171d23;
   border-radius: 12px;
   position: relative;
@@ -154,6 +154,13 @@
   border-radius: 8px;
   box-sizing: border-box;
   transition: all 0.2s ease-in;
+}
+
+.dropdown-content input {
+  width: 90% !important;
+  padding: 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 .input_value_section {

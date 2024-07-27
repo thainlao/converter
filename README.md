@@ -1,18 +1,35 @@
-# React + TypeScript + Docker + Vite
+# Coverter (Конвертер валют)
+
+---
+
+Стек:
+* React
+* Typescript
+* CSS
+  
+---
 
 to run
-//npm i
+```
+git clone https://github.com/thainlao/converter
+npm i
 
-//npm run dev
+npm run dev
+```
 
-or you can open it 
-https://thainlao.github.io/converter/
+---
+
+or you can open it [site](https://thainlao.github.io/converter/)
+
+---
 
 or you can use Docker
+```
 docker build -t <name> .
 
 
 docker run -p <PORT> <name>
+```
 
 http://localhost:8080/converter/
 

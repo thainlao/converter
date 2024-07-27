@@ -20,7 +20,7 @@ npm run dev
 
 ---
 
-or you can open it [site](https://thainlao.github.io/converter/)
+or you can open [site](https://thainlao.github.io/converter/)
 
 ---
 

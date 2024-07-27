@@ -5,6 +5,7 @@
 Стек:
 * React
 * Typescript
+* Docker
 * CSS
   
 ---
